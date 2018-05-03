@@ -9,6 +9,7 @@ const app = express();
 
 // Open database
 const db = new sqlite.Database('data.db');
+const tbl = 'sampledata'
 
 // View engine
 app.set('view engine', 'ejs');
@@ -23,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // render main page with catalog info
 app.get('/', (req, res) => {
-    db.all('SELECT * FROM fam_info', (error, rows) => {
+    db.all('SELECT * FROM ' + tbl, (error, rows) => {
         if (!error) {
             res.render('saver', {
                 catalog: rows,
@@ -37,7 +38,7 @@ app.get('/', (req, res) => {
 // send full catalog
 app.get('/=load_catalog', (req, res) => {
     console.log('Catalog generate request received.');
-    db.all('SELECT * FROM fam_info', (error, rows) => {
+    db.all('SELECT * FROM ' + tbl, (error, rows) => {
         if (!error) {
             res.send(rows);
         } else {
@@ -49,7 +50,7 @@ app.get('/=load_catalog', (req, res) => {
 // insert new catalog entry via POST request, respond with success message
 app.post('/new-entry', (req, res) => {
     console.log('New entry post request received: ' + req.body.name);
-    db.run('INSERT INTO fam_info (name, species, location) VALUES ($n, $s, $l)', 
+    db.run('INSERT INTO ' + tbl + ' (name, species, location) VALUES ($n, $s, $l)', 
     {
         $n: req.body.name,
         $s: req.body.species,
@@ -66,7 +67,7 @@ app.post('/new-entry', (req, res) => {
 
 // Render /data page with data populated from var nm above
 app.get('/data', (req, res) => {
-    db.all('SELECT * FROM fam_info', (error, rows) => {
+    db.all('SELECT * FROM ' + tbl, (error, rows) => {
         if (error) {
             console.log(error);
         } else {
@@ -80,7 +81,7 @@ app.get('/data', (req, res) => {
 // Synchronous datafetch test
 app.get('/data/more', (req, res) => {
     console.log('Get request received.');
-    db.get('SELECT * FROM fam_info WHERE id = 3', (error, row) => {
+    db.get('SELECT * FROM ' + tbl + ' WHERE id = 3', (error, row) => {
         if (!error) {
             res.send(`${row.name} is of species ${row.species}. Current location: ${row.location}`);
         } else {
@@ -91,7 +92,7 @@ app.get('/data/more', (req, res) => {
 
 // Lookup a user-entered ID
 app.get('/lookup/:entryID', (req, res) => {
-    db.get('SELECT * FROM fam_info WHERE id = $ID', {
+    db.get('SELECT * FROM ' + tbl + ' WHERE id = $ID', {
         $ID: req.params.entryID
     }, (err, row) => {
         if (err) {
@@ -106,7 +107,7 @@ app.get('/lookup/:entryID', (req, res) => {
 // delete from database
 app.get('/delete/:entryID', (req, res) => {
     console.log('Request to delete ' + req.params.entryID);
-    db.run('DELETE FROM fam_info WHERE id = $ID', {
+    db.run('DELETE FROM ' + tbl + ' WHERE id = $ID', {
         $ID: req.params.entryID
     }, (err) => {
         if (err) {

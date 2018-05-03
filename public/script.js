@@ -56,7 +56,8 @@ function genCatalog() {
             // console.log(string_array);
             // console.log(pop_catalog);
 
-            document.getElementById('catalog').innerHTML = pop_catalog;
+            document.getElementById('catalog').innerHTML = (pop_catalog + 
+                '<p>...</p><p><a href="/data">See full catalog with details.</a></p>');
         }
     };
 
