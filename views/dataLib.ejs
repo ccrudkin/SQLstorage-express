@@ -1,0 +1,20 @@
+<% include partials/header_std %>
+  <h1>Data Library</h1>
+  <div class="catalog">
+    <h3>ID&nbsp|&nbspName&nbsp|&nbspSpecies&nbsp|&nbspLocation</h3>
+    <% data_obj.forEach(function(item) { %>
+      <p><%= item.id %>&nbsp--&nbsp<%= item.name %>&nbsp--&nbsp<%= item.species %>
+      &nbsp--&nbsp<%= item.location %></p>
+    <% }) %>
+  </div>
+  <div class="catalog">
+    <form id="delete_entries">
+      <input id="deleteField" placeholder="Delete entry by ID">
+      <button type="button" id="deleteButton" class="buttons">Delete</button>
+    </form>
+  </div>
+  <div class="catalog">
+    <p><a href="/">Return to main page.</a></p>
+  </div>
+  <script src="dataLibScript.js"></script>
+<% include partials/footer %>

@@ -1,0 +1,18 @@
+{
+  "name": "storageapp",
+  "version": "1.0.0",
+  "description": "SQL storage use case",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "*",
+    "ejs": "^2.5.9",
+    "express": "*",
+    "express-validator": "^5.1.2",
+    "sqlite3": "^4.0.0"
+  },
+  "author": "Collin Rudkin",
+  "license": "ISC"
+}

@@ -1,0 +1,69 @@
+<% include partials/header %>
+  <h1>SQL DataBase</h1>
+    <form id="chars_form">
+      <!-- <div class="item_id">
+        <label for="item_id">ID: </label>
+        <input id="item_id" name="item_id" placeholder="ID number"> 
+      </div> -->
+      <div class="inputs">
+        <div class="characteristics">
+          <label for="name">Name: </label>
+          <input id="name" name="item_name" placeholder="Name">
+        </div>
+        <div class="characteristics">
+          <label for="species">Species: </label>
+          <input id="species" name="item_species" placeholder="Species">
+        </div>
+        <div class="characteristics">
+          <label for="location">Location: </label>
+          <input id="location" name="item_location" placeholder="Current location">
+        </div>
+        <button type="button" id="submit_button" class="buttons">Submit ID</button>
+      </div>
+    </form>
+    <h2>Lookup and Report</h2>
+    <div class="report_id">
+      <form id="lookup_field">
+        <label for="report_id">Lookup ID: </label>
+        <input id="report_id" name="report_id" placeholder="Lookup ID">
+        <button type="button" id="lookup_button" class="buttons">Lookup</button>
+      </form>
+    </div>
+    <div class="report_chars">
+      <div class="report_chars_u">
+        <div class="char_label">
+          <p>Name: </p>
+        </div>
+        <div class="char_value">
+          <p id="rep_name">Name</p>
+        </div>
+      </div>
+      <div class="report_chars_u">
+        <div class="char_label">
+          <p>Species: </p>
+        </div>
+        <div class="char_value">
+          <p id="rep_species">Species</p>
+        </div>
+      </div>
+      <div class="report_chars_u">
+        <div class="char_label">
+          <p>Location: </p>
+        </div>
+        <div class="char_value">
+          <p id="rep_location">Location</p>
+        </div>
+      </div>
+    </div>
+    <h2>ID Catalog</h2>
+    <div class="catalog">
+      <div id="catalog">
+        <% catalog.forEach((entry) => {  %>
+          <p><%=entry.id %> <%=entry.name %></p>
+        <% }) %>
+        <p>...</p>
+        <p><a href="/data">See full catalog with details.</a></p>
+      </div>
+    </div>
+    <script src="script.js"></script>
+ <% include partials/footer %>
